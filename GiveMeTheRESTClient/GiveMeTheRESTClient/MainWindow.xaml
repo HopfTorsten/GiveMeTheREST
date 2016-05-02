@@ -1,0 +1,73 @@
+﻿<Window x:Class="GiveMeTheRESTClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GiveMeTheRESTClient"
+        mc:Ignorable="d"
+        Title="Give Me The REST" Height="480" Width="640" MinHeight="480" MinWidth="640" Icon="img/1462230459_advertising.ico">
+    <Window.Background>
+        <SolidColorBrush Color="#1d1d1d" />
+    </Window.Background>
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:Message}">
+            <Border Background="#eff4ff" Margin="5" Padding="10" BorderBrush="#1d1d1d" BorderThickness="2">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.2"/>
+                </Border.Effect>
+                <StackPanel DockPanel.Dock="Left" Margin="0">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" Margin="0" FontSize="20" Foreground="#1d1d1d"/>
+                    <TextBlock Text="{Binding Date}" HorizontalAlignment="Left" Margin="0" FontSize="12" Foreground="#1d1d1d"/>
+                    <TextBlock Text="{Binding Value}" HorizontalAlignment="Left" Margin="0" FontSize="15" Foreground="#1d1d1d"/>
+                    <TreeViewItem ItemsSource="{Binding Childs}"/>
+                </StackPanel>
+            </Border>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="557*"/>
+        </Grid.ColumnDefinitions>
+        <TreeView Name="tvMessages" ItemsSource="{Binding messages}" Grid.ColumnSpan="2" Margin="0,0,0,44">
+            <TreeView.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF830F2E" Offset="1"/>
+                    <GradientStop Color="#FFB91D47" Offset="0.106"/>
+                </RadialGradientBrush>
+            </TreeView.Background>
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Neue Antwort" Click="NewAnswer_Click">
+                        <MenuItem.Icon>
+                            <Image Source="img/fist.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Neues Kommentar" Click="NewComment_Click">
+                        <MenuItem.Icon>
+                            <Image Source="img/advertising.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+        </TreeView>
+        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Right" Height="100" Margin="0,0,12,54" VerticalAlignment="Bottom" Width="100" Source="img/advertising.png" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect Opacity="0.2"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="24.775"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <TextBlock x:Name="label" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="39" Width="632" TextAlignment="Center" FontWeight="Bold" Foreground="#eff4ff">
+        Torsten Hopf, Moritz Ragg
+            <LineBreak />
+        DHBW 2016
+        </TextBlock>
+    </Grid>
+</Window>
