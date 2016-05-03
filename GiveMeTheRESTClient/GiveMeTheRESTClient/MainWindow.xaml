@@ -12,9 +12,6 @@
     <Window.Resources>
         <HierarchicalDataTemplate DataType="{x:Type local:Message}">
             <Border Background="#eff4ff" Margin="5" Padding="10" BorderBrush="#1d1d1d" BorderThickness="2">
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.2"/>
-                </Border.Effect>
                 <StackPanel DockPanel.Dock="Left" Margin="0">
                     <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" Margin="0" FontSize="20" Foreground="#1d1d1d"/>
                     <TextBlock Text="{Binding Date}" HorizontalAlignment="Left" Margin="0" FontSize="12" Foreground="#1d1d1d"/>
