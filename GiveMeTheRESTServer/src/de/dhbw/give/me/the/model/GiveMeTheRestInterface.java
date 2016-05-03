@@ -1,5 +1,6 @@
 package de.dhbw.give.me.the.model;
 import java.util.List;
+
 public interface GiveMeTheRestInterface {
 
 	public List<GiveMeAMessage> getRootMessages();
