@@ -13,9 +13,22 @@
         <HierarchicalDataTemplate DataType="{x:Type local:Message}">
             <Border Background="#eff4ff" Margin="5" Padding="10" BorderBrush="#1d1d1d" BorderThickness="2">
                 <StackPanel DockPanel.Dock="Left" Margin="0">
-                    <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" Margin="0" FontSize="20" Foreground="#1d1d1d"/>
-                    <TextBlock Text="{Binding Date}" HorizontalAlignment="Left" Margin="0" FontSize="12" Foreground="#1d1d1d"/>
-                    <TextBlock Text="{Binding Value}" HorizontalAlignment="Left" Margin="0" FontSize="15" Foreground="#1d1d1d"/>
+                    <TextBlock Text="{Binding Value}" HorizontalAlignment="Left" Margin="0" FontSize="15" Foreground="#1d1d1d">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Neue Antwort" Click="NewAnswer_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="img/fist.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Neues Kommentar" Click="NewComment_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="img/advertising.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
                     <TreeViewItem ItemsSource="{Binding Childs}"/>
                 </StackPanel>
             </Border>
@@ -33,20 +46,6 @@
                     <GradientStop Color="#FFB91D47" Offset="0.106"/>
                 </RadialGradientBrush>
             </TreeView.Background>
-            <TreeView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Neue Antwort" Click="NewAnswer_Click">
-                        <MenuItem.Icon>
-                            <Image Source="img/fist.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Neues Kommentar" Click="NewComment_Click">
-                        <MenuItem.Icon>
-                            <Image Source="img/advertising.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </ContextMenu>
-            </TreeView.ContextMenu>
         </TreeView>
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Right" Height="100" Margin="0,0,27,9" VerticalAlignment="Bottom" Width="100" Source="img/advertising.png" RenderTransformOrigin="0.5,0.5">
             <Image.Effect>

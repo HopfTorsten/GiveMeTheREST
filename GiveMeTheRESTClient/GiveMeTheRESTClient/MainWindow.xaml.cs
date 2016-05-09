@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
-
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GiveMeTheRESTClient
 {
@@ -11,33 +14,40 @@ namespace GiveMeTheRESTClient
     public partial class MainWindow : Window
     {
 
-        public List<Message> messages { get; set; }
+        public ObservableCollection<Message> messages { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
             this.DataContext = this;
-            Message message3 = new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { });
-            Message message2 = new Message("Brutus", "I'll kill you!", "2.1.2016", new List<Message> {message3 });
-            Message message1 = new Message("Julius Caesar", "Hay folks!", "1.1.2016", new List<Message> { message2});
+            Message message3, message2, message1;
+            message3 = new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { });
+            message2 = new Message("Brutus", "I'll kill you!", "2.1.2016", new List<Message> { message3 });
+            message1 = new Message("Julius Caesar", "Hay folks!", "1.1.2016", new List<Message> { message2 });
 
-            Message message = new Message("Julius Caesar", "Hay folks!", "1.1.2016", new List<Message> { message2 });
+            message3.Parent = message2;
+            message2.Parent = message1;
 
-            messages = new List<Message>();
+            messages = new ObservableCollection<Message>();
             messages.Add(message1);
-            messages.Add(message);
 
         }
 
         public void NewAnswer_Click(object sender, EventArgs e)
         {
-            // TODO
+            Message item = ((sender as MenuItem).DataContext) as Message;
+            item.Childs.Add(new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { }, item));
+            tvMessages.Items.Refresh();
         }
 
         public void NewComment_Click(object sender, EventArgs e)
         {
-            // TODO
+            Message item = ((sender as MenuItem).DataContext) as Message;
+            item.Parent.Childs.Add(new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { }, item.Parent));
+            tvMessages.Items.Refresh();
+            
+       
         }
     }
 }
