@@ -40,7 +40,7 @@ namespace GiveMeTheRESTClient
         private async void InitializeREST()
         {
             connection = new RESTConnection();
-            messages = await connection.GetMessages();
+            connection.GetMessages();
             RefreshTreeView();
         }
 
