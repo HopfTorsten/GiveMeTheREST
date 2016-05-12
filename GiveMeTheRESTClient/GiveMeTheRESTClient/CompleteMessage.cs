@@ -13,10 +13,13 @@ namespace GiveMeTheRESTClient
         public string Date { get; set; }
         public Collection<CompleteMessage> Childs { get; set; }
 
-        public CompleteMessage() { }
+        public CompleteMessage() {
+            Childs = new Collection<CompleteMessage>();
+        }
 
         public CompleteMessage(string name, string value, string date, Collection<CompleteMessage> childs, CompleteMessage parent = null)
         {
+            Childs = new Collection<CompleteMessage>();
             Name = name;
             Value = value;
             Date = date;

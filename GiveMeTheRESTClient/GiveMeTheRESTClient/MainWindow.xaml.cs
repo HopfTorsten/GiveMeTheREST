@@ -40,7 +40,8 @@ namespace GiveMeTheRESTClient
         private async void InitializeREST()
         {
             connection = new RESTConnection();
-            connection.GetMessages();
+            messages =  await connection.GetMessages();
+            tvMessages.ItemsSource = messages;
             RefreshTreeView();
         }
 
@@ -51,16 +52,22 @@ namespace GiveMeTheRESTClient
 
         public void NewAnswer_Click(object sender, EventArgs e)
         {
-            /*Message item = ((sender as MenuItem).DataContext) as Message;
-            item.Childs.Add(new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { }, item));
-             RefreshTreeView();*/
+            CompleteMessage item = ((sender as MenuItem).DataContext) as CompleteMessage;
+            CompleteMessage answer = new CompleteMessage("Nero", "And I'll burn all down!", "3.1.2016", new Collection<CompleteMessage> { }, item);
+            item.Childs.Add(answer);
+            if (connection != null)
+                connection.PostMessage(answer);
+            RefreshTreeView();
         }
 
         public void NewComment_Click(object sender, EventArgs e)
         {
-            /*Message item = ((sender as MenuItem).DataContext) as Message;
-            item.Parent.Childs.Add(new Message("Nero", "And I'll burn all down!", "3.1.2016", new List<Message> { }, item.Parent));
-            RefreshTreeView();*/
+            CompleteMessage item = ((sender as MenuItem).DataContext) as CompleteMessage;
+            CompleteMessage comment = new CompleteMessage("Nero", "And I'll burn all down!", "3.1.2016", new Collection<CompleteMessage> { }, item.Parent);
+            item.Parent.Childs.Add(comment);
+            if (connection != null)
+                connection.PostMessage(comment);
+            RefreshTreeView();
         }
     }
 }

@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Integer.cs" />
     <Compile Include="JSONMessage.cs" />
     <Compile Include="JSONMessages.cs" />
     <Compile Include="Message.cs" />
